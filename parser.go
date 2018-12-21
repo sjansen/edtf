@@ -12,14 +12,18 @@ var dateRE *regexp.Regexp
 func init() {
 	collapseRE = regexp.MustCompile(`\s+`)
 	dateRE = regexp.MustCompile(collapse(`
-            ^
-            (?P<year>[0-9]{4})
-            -
-            (?P<month>[0-9]{2})
+	  ^
+	  (?P<year>[0-9]{4})
+	  (?:
 	    -
-            (?P<day>[0-9]{2})
-            $
-        `))
+	    (?P<month>[0-9]{2})
+	    (?:
+	      -
+	      (?P<day>[0-9]{2})
+	    )?
+	  )?
+	  $
+	`))
 }
 
 func collapse(src string) string {
@@ -43,7 +47,7 @@ func parse(s string) (d *Date, err error) {
 func parseInt(s string) int {
 	i, err := strconv.Atoi(s)
 	if err != nil {
-		return -1
+		return 0
 	}
 	return i
 }

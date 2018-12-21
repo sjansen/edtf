@@ -5,11 +5,11 @@ import (
 	"log"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestParser(t *testing.T) {
-	assert := assert.New(t)
+	require := require.New(t)
 
 	r, err := newFixtureReader("testdata/date.csv", []string{
 		"year", "month", "day",
@@ -28,15 +28,15 @@ func TestParser(t *testing.T) {
 
 		actual, err := parse(row.input)
 		if row.err != "" {
-			assert.EqualError(err, row.err)
+			require.EqualError(err, row.err)
 		} else {
 			expected := &Date{
 				Year:  int16(row.vals[0]),
 				Month: uint8(row.vals[1]),
 				Day:   uint8(row.vals[2]),
 			}
-			assert.NoError(err)
-			assert.Equal(expected, actual, row.input)
+			require.NoError(err)
+			require.Equal(expected, actual, row.input)
 		}
 	}
 }
