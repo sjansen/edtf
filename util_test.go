@@ -29,8 +29,11 @@ func newFixtureReader(filename string, cols []string) (*fixtureReader, error) {
 	}
 
 	record, err := r.csv.Read()
-	n := len(cols)
-	if len(record) != n+2 {
+	if err != nil {
+		return nil, err
+	}
+
+	if len(record) != len(cols)+2 {
 		err := fmt.Errorf("column count mismatch: %q", filename)
 		return nil, err
 	}
