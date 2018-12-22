@@ -16,6 +16,23 @@ const (
 	Summer
 	Autumn
 	Winter
+	SpringNorthernHemisphere
+	SummerNorthernHemisphere
+	AutumnNorthernHemisphere
+	WinterNorthernHemisphere
+	SpringSouthernHemisphere
+	SummerSouthernHemisphere
+	AutumnSouthernHemisphere
+	WinterSouthernHemisphere
+	Quarter1
+	Quarter2
+	Quarter3
+	Quarter4
+	Quadrimester1
+	Quadrimester2
+	Quadrimester3
+	Semestral1
+	Semestral2
 )
 
 type Date struct {
