@@ -14,7 +14,7 @@ func init() {
 	collapseRE = regexp.MustCompile(`\s+`)
 	dateRE = regexp.MustCompile(collapse(`
 	  ^
-	  (?P<year>[0-9]{4})
+	  (?P<simpleYear>[0-9]{4})
 	  (?:
 	    -
 	    (?P<monthOrSeason>[0-9]{2})
@@ -22,6 +22,17 @@ func init() {
 	      -
 	      (?P<day>[0-9]{2})
 	    )?
+	  )?
+	  |
+	  Y
+	  (?P<complexYear>[0-9]+)
+	  (?:
+	    E
+	    (?P<exponent>[0-9]+)
+	  )?
+	  (?:
+	    S
+	    (?P<sigdigits>[0-9]+)
 	  )?
 	  $
 	`))
@@ -44,8 +55,15 @@ func ParseDate(s string) (d *Date, err error) {
 	}
 
 	d = &Date{
-		Year: parseInt16(m[dateIdx["year"]]),
-		Day:  parseUint8(m[dateIdx["day"]]),
+		Day: parseUint8(m[dateIdx["day"]]),
+	}
+
+	if s := m[dateIdx["simpleYear"]]; s != "" {
+		d.Year = parseInt16(s)
+	} else if s := m[dateIdx["complexYear"]]; s != "" {
+		d.Year = parseInt16(s)
+		d.Exponent = parseUint8(m[dateIdx["exponent"]])
+		d.SigDigits = parseUint8(m[dateIdx["sigdigits"]])
 	}
 
 	monthOrSeason := parseUint8(m[dateIdx["monthOrSeason"]])
