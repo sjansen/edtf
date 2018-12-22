@@ -14,7 +14,7 @@ func init() {
 	collapseRE = regexp.MustCompile(`\s+`)
 	dateRE = regexp.MustCompile(collapse(`
 	  ^
-	  (?P<simpleYear>[0-9]{4})
+	  (?P<simpleYear>-?[0-9]{4})
 	  (?:
 	    -
 	    (?P<monthOrSeason>[0-9]{2})
@@ -25,7 +25,7 @@ func init() {
 	  )?
 	  |
 	  Y
-	  (?P<complexYear>[0-9]+)
+	  (?P<complexYear>-?[0-9]+)
 	  (?:
 	    E
 	    (?P<exponent>[0-9]+)
