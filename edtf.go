@@ -11,10 +11,8 @@ const (
 	DayUncertain
 )
 
-type Season uint8
-
 const (
-	Spring Season = 21 + iota
+	Spring uint8 = 21 + iota
 	Summer
 	Autumn
 	Winter
@@ -26,7 +24,7 @@ type Date struct {
 	Exponent  uint8
 	SigDigits uint8
 	Month     uint8
-	Season    Season
+	Season    uint8
 	Day       uint8
 }
 

@@ -2,6 +2,7 @@ package edtf
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"os"
 )
@@ -30,14 +31,20 @@ func newFixtureReader(filename string, cols []string) (*fixtureReader, error) {
 	record, err := r.csv.Read()
 	n := len(cols)
 	if len(record) != n+2 {
-		// TODO return error
+		err := fmt.Errorf("column count mismatch: %q", filename)
+		return nil, err
 	}
 	if record[0] != "input" || record[1] != "error" {
-		// TODO return error
+		err := fmt.Errorf("column name mismatch: %q", filename)
+		return nil, err
 	}
 	for i := range cols {
 		if record[i+2] != cols[i] {
-			// TODO return error
+			err := fmt.Errorf(
+				"expected=%q found=%q: %q",
+				record[i+2], cols[i], filename,
+			)
+			return nil, err
 		}
 	}
 

@@ -17,7 +17,7 @@ func init() {
 	  (?P<year>[0-9]{4})
 	  (?:
 	    -
-	    (?P<month>[0-9]{2})
+	    (?P<monthOrSeason>[0-9]{2})
 	    (?:
 	      -
 	      (?P<day>[0-9]{2})
@@ -44,10 +44,18 @@ func ParseDate(s string) (d *Date, err error) {
 	}
 
 	d = &Date{
-		Year:  parseInt16(m[dateIdx["year"]]),
-		Month: parseUint8(m[dateIdx["month"]]),
-		Day:   parseUint8(m[dateIdx["day"]]),
+		Year: parseInt16(m[dateIdx["year"]]),
+		Day:  parseUint8(m[dateIdx["day"]]),
 	}
+
+	monthOrSeason := parseUint8(m[dateIdx["monthOrSeason"]])
+	switch {
+	case monthOrSeason >= 21:
+		d.Season = monthOrSeason
+	default:
+		d.Month = monthOrSeason
+	}
+
 	return
 }
 

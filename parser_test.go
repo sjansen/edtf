@@ -12,7 +12,7 @@ func TestParseDate(t *testing.T) {
 	require := require.New(t)
 
 	r, err := newFixtureReader("testdata/date.csv", []string{
-		"year", "month", "day",
+		"year", "month", "season", "day",
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -31,9 +31,10 @@ func TestParseDate(t *testing.T) {
 			require.EqualError(err, row.err)
 		} else {
 			expected := &Date{
-				Year:  parseInt16(row.vals[0]),
-				Month: parseUint8(row.vals[1]),
-				Day:   parseUint8(row.vals[2]),
+				Year:   parseInt16(row.vals[0]),
+				Month:  parseUint8(row.vals[1]),
+				Season: parseUint8(row.vals[2]),
+				Day:    parseUint8(row.vals[3]),
 			}
 			require.NoError(err)
 			require.Equal(expected, actual, row.input)
