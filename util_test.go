@@ -9,7 +9,7 @@ import (
 type row struct {
 	input string
 	err   string
-	vals  []int
+	vals  []string
 }
 
 type fixtureReader struct {
@@ -64,9 +64,9 @@ func (r *fixtureReader) next() (*row, error) {
 		return row, nil
 	}
 
-	row.vals = make([]int, n)
+	row.vals = make([]string, n)
 	for i := range row.vals {
-		row.vals[i] = parseInt(record[i+2])
+		row.vals[i] = record[i+2]
 	}
 	return row, nil
 }

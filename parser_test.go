@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestParser(t *testing.T) {
+func TestParseDate(t *testing.T) {
 	require := require.New(t)
 
 	r, err := newFixtureReader("testdata/date.csv", []string{
@@ -26,14 +26,14 @@ func TestParser(t *testing.T) {
 			log.Fatal(err)
 		}
 
-		actual, err := parse(row.input)
+		actual, err := ParseDate(row.input)
 		if row.err != "" {
 			require.EqualError(err, row.err)
 		} else {
 			expected := &Date{
-				Year:  int16(row.vals[0]),
-				Month: uint8(row.vals[1]),
-				Day:   uint8(row.vals[2]),
+				Year:  parseInt16(row.vals[0]),
+				Month: parseUint8(row.vals[1]),
+				Day:   parseUint8(row.vals[2]),
 			}
 			require.NoError(err)
 			require.Equal(expected, actual, row.input)
