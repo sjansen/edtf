@@ -37,7 +37,7 @@ const (
 
 type Date struct {
 	UA        UncertainOrApproximate
-	Year      int16
+	Year      int64
 	Exponent  uint8
 	SigDigits uint8
 	Month     uint8

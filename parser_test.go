@@ -29,17 +29,18 @@ func TestParseDate(t *testing.T) {
 
 		actual, err := ParseDate(row.input)
 		if row.err != "" {
-			require.EqualError(err, row.err)
+			require.EqualError(err, row.err, row.input)
 		} else {
+			require.NoError(err, row.input)
+
 			expected := &Date{
-				Year:      parseInt16(row.vals[0]),
+				Year:      parseInt64(row.vals[0]),
 				Month:     parseUint8(row.vals[1]),
 				Day:       parseUint8(row.vals[2]),
 				Exponent:  parseUint8(row.vals[3]),
 				SigDigits: parseUint8(row.vals[4]),
 				Season:    parseUint8(row.vals[5]),
 			}
-			require.NoError(err)
 			require.Equal(expected, actual, row.input)
 		}
 	}
