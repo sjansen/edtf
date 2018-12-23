@@ -40,3 +40,17 @@ func TestBounds(t *testing.T) {
 		})
 	}
 }
+
+func TestIsLeapYear(t *testing.T) {
+	require := require.New(t)
+
+	require.Equal(false, isLeapYear(1900))
+	require.Equal(true, isLeapYear(1996))
+	require.Equal(false, isLeapYear(1997))
+	require.Equal(false, isLeapYear(1998))
+	require.Equal(false, isLeapYear(1999))
+	require.Equal(true, isLeapYear(2000))
+	require.Equal(false, isLeapYear(2100))
+	require.Equal(true, isLeapYear(2104))
+	require.Equal(true, isLeapYear(2400))
+}
