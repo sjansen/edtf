@@ -1,8 +1,10 @@
 # Directories
+/dist/
 
 # Files
 /TODO
 .DS_Store
+c.out
 
 # Patterns
 .*.sw[op]
