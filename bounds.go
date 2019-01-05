@@ -15,7 +15,7 @@ func isLeapYear(year int64) bool {
 func (d *Date) LowerStrict() *Date {
 	year := d.Year
 	if d.Exponent > 0 {
-		year = year * int64(math.Pow10(int(d.Exponent)))
+		year *= int64(math.Pow10(int(d.Exponent)))
 	}
 
 	month := d.Month
@@ -34,7 +34,7 @@ func (d *Date) LowerStrict() *Date {
 func (d *Date) UpperStrict() *Date {
 	year := d.Year
 	if d.Exponent > 0 {
-		year = year * int64(math.Pow10(int(d.Exponent)))
+		year *= int64(math.Pow10(int(d.Exponent)))
 	}
 
 	month := d.Month
