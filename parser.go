@@ -52,7 +52,7 @@ func collapse(src string) string {
 func ParseDate(s string) (d *Date, err error) {
 	m := dateRE.FindStringSubmatch(s)
 	if len(m) == 0 {
-		err = fmt.Errorf("Invalid date: %q", s)
+		err = fmt.Errorf("invalid date: %q", s)
 		return
 	}
 

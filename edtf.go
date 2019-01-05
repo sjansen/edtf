@@ -36,13 +36,13 @@ const (
 )
 
 type Date struct {
-	UA        UncertainOrApproximate
 	Year      int64
 	Exponent  uint8
 	SigDigits uint8
 	Month     uint8
 	Season    uint8
 	Day       uint8
+	UA        UncertainOrApproximate
 }
 
 type Time struct {
